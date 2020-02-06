@@ -6,4 +6,4 @@ A web connect4 game written in JS
 
 - [x] Use "function" instruction instead lambdas
 - [x] Replace HTML array by string array
-- [ ] Create file for constants
+- [ ] Replace alert for winner by other...
