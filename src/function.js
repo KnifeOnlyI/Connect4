@@ -8,25 +8,37 @@ function setCharAt(str, index, chr) {
 
 function subscribe(id) {
     unsubscribe = gamesStore.doc(id).onSnapshot((snap) => {
-        console.debug('snap.data()', snap.data());
         playerTurn = snap.data().player;
-        document.getElementById('currentPlayer').innerText = playerTurn;
+
+        console.debug(playerTurn, playerColor);
+
+        if (snap.data().ready) {
+            loading('waiting', false);
+            document.querySelector('#info-alert-text').innerText = 'Have fun !';
+        }
+
+        document.querySelector('#player-color').classList.value = `token ${playerColor}`;
+        document.querySelector('#player-turn').classList.value = `token ${playerTurn}`;
 
         board = snap.data().grid;
         drawBoard();
 
         gameEnded = snap.data().winner !== '';
+
+        if (gameEnded) {
+            document.querySelector('#info-alert-text').innerText = `${snap.data().winner} won !`;
+        }
     });
 }
 
-function loading(state) {
-    document.querySelectorAll('.spinner-border').forEach((loader) => {
+function loading(type, state) {
+    document.querySelectorAll(`.spinner-${type}`).forEach((loader) => {
         loader.style.display = state ? 'inline-block' : 'none';
     });
 }
 
 function newGame() {
-    loading(true);
+    loading('newgame', true);
 
     if (unsubscribe) unsubscribe();
 
@@ -35,25 +47,29 @@ function newGame() {
             player: 'red',
             grid: new Array(BOARD_SIZE).fill('0'.repeat(BOARD_SIZE)),
             winner: '',
+            ready: false,
         })
         .then((snap) => {
             gameId = snap.id;
             document.querySelector('#game-id').value = snap.id;
             playerColor = 'red';
-            document.querySelector('#playerColor').innerText = playerColor;
+            document.querySelector('#player-color').classList.value = `token ${playerColor}`;
+            document.querySelector('#player-turn').classList.value = `token ${playerColor}`;
             subscribe(snap.id);
-            loading(false);
+            loading('newgame', false);
+
+            loading('waiting', true);
+            document.querySelector('#info-alert-text').innerText =
+                'Please wait for your opponent to connect.';
         });
 }
 
 function connect() {
-    loading(true);
+    loading('connect', true);
 
     if (unsubscribe) unsubscribe();
 
     const writtenId = document.querySelector('#game-id').value;
-
-    console.debug('attempting to connect to', writtenId);
 
     gamesStore
         .doc(writtenId)
@@ -61,15 +77,22 @@ function connect() {
         .then((snap) => {
             gameId = snap.id;
             playerColor = 'yellow';
-            document.querySelector('#playerColor').innerText = playerColor;
+            document.querySelector('#player-color').classList.value = `token ${playerColor}`;
+            document.querySelector('#player-turn').classList.value = `token ${
+                playerColor === 'red' ? 'yellow' : 'red'
+            }`;
             subscribe(snap.id);
-            loading(false);
+
+            return gamesStore.doc(writtenId).update({ ready: true });
+        })
+        .then(() => {
+            loading('connect', false);
         })
         .catch((e) => {
             gameId = '';
             console.error('unable to connect to game ' + writtenId, e);
             document.querySelector('#game-id').value = '';
-            loading(false);
+            loading('connect', false);
         });
 }
 
@@ -79,10 +102,9 @@ function connect() {
 function putInColumn(column) {
     if (playerColor !== playerTurn) return;
 
-
     let firstAvailableRow = -1;
 
-    for (let i = (BOARD_SIZE - 1); i >= 0; i--) {
+    for (let i = BOARD_SIZE - 1; i >= 0; i--) {
         if (board[i][column] === '0') {
             firstAvailableRow = i;
             break;
@@ -96,28 +118,22 @@ function putInColumn(column) {
             playerTurn = 'yellow';
 
             gameEnded = gameIsEnded('R', firstAvailableRow, column);
-
-            if (gameEnded) {
-                window.alert('Red player win. Fatality !');
-            }
         } else {
             board[firstAvailableRow] = setCharAt(board[firstAvailableRow], column, 'Y');
 
             playerTurn = 'red';
 
             gameEnded = gameIsEnded('Y', firstAvailableRow, column);
-
-            if (gameEnded) {
-                window.alert('Yellow player win. Fatality !');
-            }
         }
 
-        document.getElementById('currentPlayer').innerText = playerColor === 'red' ? 'yellow' : 'red';
+        document.querySelector('#player-turn').classList.value = `token ${
+            playerColor === 'red' ? 'yellow' : 'red'
+        }`;
 
         gamesStore.doc(gameId).set({
             player: playerColor === 'red' ? 'yellow' : 'red',
             grid: board,
-            winner: gameEnded ? playerColor : ''
+            winner: gameEnded ? playerColor : '',
         });
 
         drawBoard();
@@ -184,6 +200,6 @@ function initGame() {
     initControls();
     initBoard();
 
-    currentPlayerHTML = document.getElementById('currentPlayer');
-    currentPlayerHTML.innerText = playerColor;
+    document.querySelector('#info-alert-text').innerText =
+        'Press "New game" to host a game, then copy the ID to you friend or paste an ID in the field then press connect to play.';
 }
