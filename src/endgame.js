@@ -9,9 +9,9 @@ function checkAtRight(color, row, column) {
 
     // Check at right
     while (currentColumn < BOARD_SIZE) {
-        if (board[row][currentColumn].className === color) {
+        if (board[row][currentColumn] === color) {
             nb++;
-        } else if (board[row][currentColumn].className.length !== 0) {
+        } else if (board[row][currentColumn] !== '0') {
             break;
         }
 
@@ -32,9 +32,9 @@ function checkAtLeft(color, row, column) {
 
     // Check at right
     while (currentColumn >= 0) {
-        if (board[row][currentColumn].className === color) {
+        if (board[row][currentColumn] === color) {
             nb++;
-        } else if (board[row][currentColumn].className.length !== 0) {
+        } else if (board[row][currentColumn] !== '0') {
             break;
         }
 
@@ -55,9 +55,9 @@ function checkAtBottom(color, row, column) {
 
     // Check at bottom
     while (currentRow < BOARD_SIZE) {
-        if (board[currentRow][column].className === color) {
+        if (board[currentRow][column] === color) {
             nb++;
-        } else if (board[currentRow][column].className.length !== 0) {
+        } else if (board[currentRow][column] !== '0') {
             break;
         }
 
@@ -79,9 +79,9 @@ function checkAtTopRight(color, row, column) {
 
     // Check at bottom
     while ((currentRow >= 0) && (currentColumn < BOARD_SIZE)) {
-        if (board[currentRow][currentColumn].className === color) {
+        if (board[currentRow][currentColumn] === color) {
             nb++;
-        } else if (board[currentRow][currentColumn].className.length !== 0) {
+        } else if (board[currentRow][currentColumn] !== '0') {
             break;
         }
 
@@ -104,9 +104,9 @@ function checkAtBottomLeft(color, row, column) {
 
     // Check at bottom
     while ((currentRow < BOARD_SIZE) && (currentColumn >= 0)) {
-        if (board[currentRow][currentColumn].className === color) {
+        if (board[currentRow][currentColumn] === color) {
             nb++;
-        } else if (board[currentRow][currentColumn].className.length !== 0) {
+        } else if (board[currentRow][currentColumn] !== '0') {
             break;
         }
 
@@ -129,9 +129,9 @@ function checkAtTopLeft(color, row, column) {
 
     // Check at bottom
     while ((currentRow >= 0) && (currentColumn >= 0)) {
-        if (board[currentRow][currentColumn].className === color) {
+        if (board[currentRow][currentColumn] === color) {
             nb++;
-        } else if (board[currentRow][currentColumn].className.length !== 0) {
+        } else if (board[currentRow][currentColumn] !== '0') {
             break;
         }
 
@@ -154,9 +154,9 @@ function checkAtBottomRight(color, row, column) {
 
     // Check at bottom
     while ((currentRow < BOARD_SIZE) && (currentColumn < BOARD_SIZE)) {
-        if (board[currentRow][currentColumn].className === color) {
+        if (board[currentRow][currentColumn] === color) {
             nb++;
-        } else if (board[currentRow][currentColumn].className.length !== 0) {
+        } else if (board[currentRow][currentColumn] !== '0') {
             break;
         }
 
