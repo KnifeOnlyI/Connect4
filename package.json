@@ -1,0 +1,22 @@
+{
+  "name": "connect4",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KnifeOnlyI/Connect4.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/KnifeOnlyI/Connect4/issues"
+  },
+  "homepage": "https://github.com/KnifeOnlyI/Connect4#readme",
+  "dependencies": {
+    "firebase": "^7.8.0"
+  }
+}

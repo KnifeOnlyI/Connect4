@@ -1,30 +1,54 @@
 <!doctype html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
 
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
 </head>
+
 <body>
 
-<p class="font-weight-bold mt-2">Current player : <span id="currentPlayer"></span></p>
+    <div class="container mt-3">
+        <div class="row align-items-center">
+            <div class="col-auto"><label for="game-id">Game ID</label></div>
+            <div class="col-auto"><input id="game-id" type="text" class="form-control"></div>
+            <div class="col-auto">
+                <button class="btn btn-outline-primary" onclick="connect()">
+                    <span class="spinner-border spinner-border-sm" style="display: none;" role="status"
+                        aria-hidden="true"></span>
+                    Connect
+                </button>
+            </div>
+            <div class="col-auto">
+                <button class="btn btn-primary" onclick="newGame()">
+                    <span class="spinner-border spinner-border-sm" style="display: none;" role="status"
+                        aria-hidden="true"></span>
+                    New game
+                </button>
+            </div>
+        </div>
 
-<hr>
+        <hr>
 
-<table>
-    <thead>
-    <tr id="control"></tr>
-    </thead>
-    <tbody id="board"></tbody>
-</table>
+        <table>
+            <thead>
+                <tr id="control"></tr>
+            </thead>
+            <tbody id="board"></tbody>
+        </table>
+    </div>
 
-<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-<script src="app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.8.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.8.0/firebase-firestore.js"></script>
+
+    <script src="app.js"></script>
+    <script src="firebase.js"></script>
 </body>
+
 </html>
