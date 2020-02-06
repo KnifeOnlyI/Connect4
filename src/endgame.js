@@ -3,15 +3,15 @@
  * @param row {number}
  * @param column {number}
  */
-let checkAtRight = (color, row, column) => {
+function checkAtRight(color, row, column) {
     let nb = 0;
     let currentColumn = column + 1;
 
     // Check at right
     while (currentColumn < BOARD_SIZE) {
-        if (board[row][currentColumn].className === color) {
+        if (board[row][currentColumn] === color) {
             nb++;
-        } else if (board[row][currentColumn].className.length !== 0) {
+        } else if (board[row][currentColumn] !== '0') {
             break;
         }
 
@@ -19,22 +19,22 @@ let checkAtRight = (color, row, column) => {
     }
 
     return nb;
-};
+}
 
 /**
  * @param color {string}
  * @param row {number}
  * @param column {number}
  */
-let checkAtLeft = (color, row, column) => {
+function checkAtLeft(color, row, column) {
     let nb = 0;
     let currentColumn = column - 1;
 
     // Check at right
     while (currentColumn >= 0) {
-        if (board[row][currentColumn].className === color) {
+        if (board[row][currentColumn] === color) {
             nb++;
-        } else if (board[row][currentColumn].className.length !== 0) {
+        } else if (board[row][currentColumn] !== '0') {
             break;
         }
 
@@ -42,22 +42,22 @@ let checkAtLeft = (color, row, column) => {
     }
 
     return nb;
-};
+}
 
 /**
  * @param color {string}
  * @param row {number}
  * @param column {number}
  */
-let checkAtBottom = (color, row, column) => {
+function checkAtBottom(color, row, column) {
     let nb = 0;
     let currentRow = row + 1;
 
     // Check at bottom
     while (currentRow < BOARD_SIZE) {
-        if (board[currentRow][column].className === color) {
+        if (board[currentRow][column] === color) {
             nb++;
-        } else if (board[currentRow][column].className.length !== 0) {
+        } else if (board[currentRow][column] !== '0') {
             break;
         }
 
@@ -65,23 +65,23 @@ let checkAtBottom = (color, row, column) => {
     }
 
     return nb;
-};
+}
 
 /**
  * @param color {string}
  * @param row {number}
  * @param column {number}
  */
-let checkAtTopRight = (color, row, column) => {
+function checkAtTopRight(color, row, column) {
     let nb = 0;
     let currentRow = row - 1;
     let currentColumn = column + 1;
 
     // Check at bottom
     while ((currentRow >= 0) && (currentColumn < BOARD_SIZE)) {
-        if (board[currentRow][currentColumn].className === color) {
+        if (board[currentRow][currentColumn] === color) {
             nb++;
-        } else if (board[currentRow][currentColumn].className.length !== 0) {
+        } else if (board[currentRow][currentColumn] !== '0') {
             break;
         }
 
@@ -90,23 +90,23 @@ let checkAtTopRight = (color, row, column) => {
     }
 
     return nb;
-};
+}
 
 /**
  * @param color {string}
  * @param row {number}
  * @param column {number}
  */
-let checkAtBottomLeft = (color, row, column) => {
+function checkAtBottomLeft(color, row, column) {
     let nb = 0;
     let currentRow = row + 1;
     let currentColumn = column - 1;
 
     // Check at bottom
     while ((currentRow < BOARD_SIZE) && (currentColumn >= 0)) {
-        if (board[currentRow][currentColumn].className === color) {
+        if (board[currentRow][currentColumn] === color) {
             nb++;
-        } else if (board[currentRow][currentColumn].className.length !== 0) {
+        } else if (board[currentRow][currentColumn] !== '0') {
             break;
         }
 
@@ -115,23 +115,23 @@ let checkAtBottomLeft = (color, row, column) => {
     }
 
     return nb;
-};
+}
 
 /**
  * @param color {string}
  * @param row {number}
  * @param column {number}
  */
-let checkAtTopLeft = (color, row, column) => {
+function checkAtTopLeft(color, row, column) {
     let nb = 0;
     let currentRow = row - 1;
     let currentColumn = column - 1;
 
     // Check at bottom
     while ((currentRow >= 0) && (currentColumn >= 0)) {
-        if (board[currentRow][currentColumn].className === color) {
+        if (board[currentRow][currentColumn] === color) {
             nb++;
-        } else if (board[currentRow][currentColumn].className.length !== 0) {
+        } else if (board[currentRow][currentColumn] !== '0') {
             break;
         }
 
@@ -140,23 +140,23 @@ let checkAtTopLeft = (color, row, column) => {
     }
 
     return nb;
-};
+}
 
 /**
  * @param color {string}
  * @param row {number}
  * @param column {number}
  */
-let checkAtBottomRight = (color, row, column) => {
+function checkAtBottomRight(color, row, column) {
     let nb = 0;
     let currentRow = row + 1;
     let currentColumn = column + 1;
 
     // Check at bottom
     while ((currentRow < BOARD_SIZE) && (currentColumn < BOARD_SIZE)) {
-        if (board[currentRow][currentColumn].className === color) {
+        if (board[currentRow][currentColumn] === color) {
             nb++;
-        } else if (board[currentRow][currentColumn].className.length !== 0) {
+        } else if (board[currentRow][currentColumn] !== '0') {
             break;
         }
 
@@ -165,7 +165,7 @@ let checkAtBottomRight = (color, row, column) => {
     }
 
     return nb;
-};
+}
 
 /**
  * @param color {string}
@@ -174,7 +174,7 @@ let checkAtBottomRight = (color, row, column) => {
  *
  * @return {boolean} TRUE if game is ended, FALSE otherwise
  */
-let gameIsEnded = (color, row, column) => {
+function gameIsEnded(color, row, column) {
     let nbAtRight = checkAtRight(color, row, column);
     let nbAtLeft = checkAtLeft(color, row, column);
     let nbAtBottom = checkAtBottom(color, row, column);
@@ -189,4 +189,4 @@ let gameIsEnded = (color, row, column) => {
         (nbAtTopRight + nbAtBottomLeft + 1) >= 4 ||
         (nbAtTopLeft + nbAtBottomRight + 1) >= 4
     );
-};
+}
