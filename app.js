@@ -4,10 +4,6 @@ const board = [];
 
 let currentPlayerHTML;
 
-let gameId = '';
-let playerColor = 'red';
-let unsubscribe;
-
 // TODO: Add endgame detection
 
 /**
@@ -37,69 +33,7 @@ let putInColumn = (column) => {
     }
 };
 
-function subscribe(id) {
-    unsubscribe = gamesStore.doc(id).onSnapshot((snap) => {
-        console.debug('in snap', snap.data().player);
-        // Update only if turn is played byt the other player
-        if (snap.data().player !== playerColor) {
-            console.debug('other player played');
-        }
-    });
-}
 
-function loading(state) {
-    document.querySelectorAll('.spinner-border').forEach((loader) => {
-        loader.style.display = state ? 'inline-block' : 'none';
-    });
-}
-
-function newGame() {
-    loading(true);
-
-    if (unsubscribe) unsubscribe();
-
-    gamesStore
-        .add({
-            player: 'red',
-            grid: new Array(BOARD_SIZE).fill('0'.repeat(BOARD_SIZE)),
-            winner: '',
-        })
-        .then((snap) => {
-            gameId = snap.id;
-            document.querySelector('#game-id').value = snap.id;
-            playerColor = 'red';
-            document.querySelector('#playerColor').innerText = playerColor;
-            subscribe(snap.id);
-            loading(false);
-        });
-}
-
-function connect() {
-    loading(true);
-
-    if (unsubscribe) unsubscribe();
-
-    const writtenId = document.querySelector('#game-id').value;
-
-    console.debug('attempting to connect to', writtenId);
-
-    gamesStore
-        .doc(writtenId)
-        .get()
-        .then((snap) => {
-            gameId = snap.id;
-            playerColor = 'yellow';
-            document.querySelector('#playerColor').innerText = playerColor;
-            subscribe(snap.id);
-            loading(false);
-        })
-        .catch((e) => {
-            gameId = '';
-            console.error('unable to connect to game ' + writtenId, e);
-            document.querySelector('#game-id').value = '';
-            loading(false);
-        });
-}
 
 window.onload = () => {
     const tbody = document.getElementById('board');
