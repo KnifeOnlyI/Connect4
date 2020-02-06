@@ -1,8 +1,9 @@
 const BOARD_SIZE = 7;
-const board = [];
 
 const boardHTML = document.querySelector("#board");
 const controlsHTML = document.querySelector("#controls");
+
+let board = [];
 
 let currentPlayerHTML;
 let gameEnded = false;

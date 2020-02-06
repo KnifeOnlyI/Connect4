@@ -11,7 +11,11 @@ function subscribe(id) {
         console.debug('snap.data()', snap.data());
         playerTurn = snap.data().player;
         document.getElementById('currentPlayer').innerText = playerTurn;
-        console.debug('next turn', playerTurn);
+
+        board = snap.data().grid;
+        drawBoard();
+
+        gameEnded = snap.data().winner !== '';
     });
 }
 
@@ -73,6 +77,9 @@ function connect() {
  * @param column {number}
  */
 function putInColumn(column) {
+    if (playerColor !== playerTurn) return;
+
+
     let firstAvailableRow = -1;
 
     for (let i = (BOARD_SIZE - 1); i >= 0; i--) {
@@ -109,6 +116,8 @@ function putInColumn(column) {
 
         gamesStore.doc(gameId).set({
             player: playerColor === 'red' ? 'yellow' : 'red',
+            grid: board,
+            winner: gameEnded ? playerColor : ''
         });
 
         drawBoard();
