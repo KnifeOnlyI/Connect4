@@ -18,6 +18,8 @@ function checkAtRight(color, row, column) {
         currentColumn++;
     }
 
+    console.log('CheckAtRight', nb);
+
     return nb;
 }
 
@@ -41,6 +43,8 @@ function checkAtLeft(color, row, column) {
         currentColumn--;
     }
 
+    console.log('CheckAtLeft', nb);
+
     return nb;
 }
 
@@ -63,6 +67,8 @@ function checkAtBottom(color, row, column) {
 
         currentRow++;
     }
+
+    console.log('CheckAtBottom', nb);
 
     return nb;
 }
@@ -89,6 +95,8 @@ function checkAtTopRight(color, row, column) {
         currentColumn++;
     }
 
+    console.log('CheckAtTopRight', nb);
+
     return nb;
 }
 
@@ -114,6 +122,8 @@ function checkAtBottomLeft(color, row, column) {
         currentColumn--;
     }
 
+    console.log('CheckAtBottomLeft', nb);
+
     return nb;
 }
 
@@ -138,6 +148,8 @@ function checkAtTopLeft(color, row, column) {
         currentRow--;
         currentColumn--;
     }
+
+    console.log('CheckAtTopLeft', nb);
 
     return nb;
 }
