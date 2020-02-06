@@ -1,11 +1,3 @@
-const BOARD_SIZE = 7;
-
-const board = [];
-
-let currentPlayerHTML;
-
-// TODO: Add endgame detection
-
 /**
  * @param column {number}
  */
@@ -18,18 +10,31 @@ let putInColumn = (column) => {
             break;
         }
     }
+
     if (firstAvailableRow !== -1) {
         if (currentPlayerHTML.innerText === 'red') {
             board[firstAvailableRow][column].className = 'red';
             currentPlayerHTML.innerText = 'Yellow';
+
+            gameEnded = gameIsEnded('red', firstAvailableRow, column);
+
+            if (gameEnded) {
+                window.alert('Red player win. Fatality !');
+            }
         } else {
             board[firstAvailableRow][column].className = 'yellow';
-            currentPlayerHTML.innerText = 'red'
+            currentPlayerHTML.innerText = 'red';
+
+            gameEnded = gameIsEnded('yellow', firstAvailableRow, column);
+
+            if (gameEnded) {
+                window.alert('Yellow player win. Fatality !');
+            }
         }
     }
 };
 
-window.onload = () => {
+let initGame = () => {
     const tbody = document.getElementById('board');
     const thead_tr = document.getElementById('control');
 
@@ -39,7 +44,9 @@ window.onload = () => {
         const button = document.createElement('button');
 
         button.onclick = () => {
-            putInColumn(i);
+            if (!gameEnded) {
+                putInColumn(i);
+            }
         };
 
         th.className = 'text-center';

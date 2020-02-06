@@ -1,0 +1,192 @@
+/**
+ * @param color {string}
+ * @param row {number}
+ * @param column {number}
+ */
+let checkAtRight = (color, row, column) => {
+    let nb = 0;
+    let currentColumn = column + 1;
+
+    // Check at right
+    while (currentColumn < BOARD_SIZE) {
+        if (board[row][currentColumn].className === color) {
+            nb++;
+        } else if (board[row][currentColumn].className.length !== 0) {
+            break;
+        }
+
+        currentColumn++;
+    }
+
+    return nb;
+};
+
+/**
+ * @param color {string}
+ * @param row {number}
+ * @param column {number}
+ */
+let checkAtLeft = (color, row, column) => {
+    let nb = 0;
+    let currentColumn = column - 1;
+
+    // Check at right
+    while (currentColumn >= 0) {
+        if (board[row][currentColumn].className === color) {
+            nb++;
+        } else if (board[row][currentColumn].className.length !== 0) {
+            break;
+        }
+
+        currentColumn--;
+    }
+
+    return nb;
+};
+
+/**
+ * @param color {string}
+ * @param row {number}
+ * @param column {number}
+ */
+let checkAtBottom = (color, row, column) => {
+    let nb = 0;
+    let currentRow = row + 1;
+
+    // Check at bottom
+    while (currentRow < BOARD_SIZE) {
+        if (board[currentRow][column].className === color) {
+            nb++;
+        } else if (board[currentRow][column].className.length !== 0) {
+            break;
+        }
+
+        currentRow++;
+    }
+
+    return nb;
+};
+
+/**
+ * @param color {string}
+ * @param row {number}
+ * @param column {number}
+ */
+let checkAtTopRight = (color, row, column) => {
+    let nb = 0;
+    let currentRow = row - 1;
+    let currentColumn = column + 1;
+
+    // Check at bottom
+    while ((currentRow >= 0) && (currentColumn < BOARD_SIZE)) {
+        if (board[currentRow][currentColumn].className === color) {
+            nb++;
+        } else if (board[currentRow][currentColumn].className.length !== 0) {
+            break;
+        }
+
+        currentRow--;
+        currentColumn++;
+    }
+
+    return nb;
+};
+
+/**
+ * @param color {string}
+ * @param row {number}
+ * @param column {number}
+ */
+let checkAtBottomLeft = (color, row, column) => {
+    let nb = 0;
+    let currentRow = row + 1;
+    let currentColumn = column - 1;
+
+    // Check at bottom
+    while ((currentRow < BOARD_SIZE) && (currentColumn >= 0)) {
+        if (board[currentRow][currentColumn].className === color) {
+            nb++;
+        } else if (board[currentRow][currentColumn].className.length !== 0) {
+            break;
+        }
+
+        currentRow++;
+        currentColumn--;
+    }
+
+    return nb;
+};
+
+/**
+ * @param color {string}
+ * @param row {number}
+ * @param column {number}
+ */
+let checkAtTopLeft = (color, row, column) => {
+    let nb = 0;
+    let currentRow = row - 1;
+    let currentColumn = column - 1;
+
+    // Check at bottom
+    while ((currentRow >= 0) && (currentColumn >= 0)) {
+        if (board[currentRow][currentColumn].className === color) {
+            nb++;
+        } else if (board[currentRow][currentColumn].className.length !== 0) {
+            break;
+        }
+
+        currentRow--;
+        currentColumn--;
+    }
+
+    return nb;
+};
+
+/**
+ * @param color {string}
+ * @param row {number}
+ * @param column {number}
+ */
+let checkAtBottomRight = (color, row, column) => {
+    let nb = 0;
+    let currentRow = row + 1;
+    let currentColumn = column + 1;
+
+    // Check at bottom
+    while ((currentRow < BOARD_SIZE) && (currentColumn < BOARD_SIZE)) {
+        if (board[currentRow][currentColumn].className === color) {
+            nb++;
+        } else if (board[currentRow][currentColumn].className.length !== 0) {
+            break;
+        }
+
+        currentRow++;
+        currentColumn++;
+    }
+
+    return nb;
+};
+
+/**
+ * @param color {string}
+ * @param row {number}
+ * @param column {number}
+ *
+ * @return {boolean} TRUE if game is ended, FALSE otherwise
+ */
+let gameIsEnded = (color, row, column) => {
+    let nbAtRight = checkAtRight(color, row, column);
+    let nbAtLeft = checkAtLeft(color, row, column);
+    let nbAtBottom = checkAtBottom(color, row, column);
+    let nbAtTopRight = checkAtTopRight(color, row, column);
+    let nbAtBottomLeft = checkAtBottomLeft(color, row, column);
+    let nbAtTopLeft = checkAtTopLeft(color, row, column);
+    let nbAtBottomRight = checkAtBottomRight(color, row, column);
+
+    return (
+        (nbAtRight + nbAtLeft + 1) >= 4 ||
+        (nbAtBottom + 1) >= 4 ||
+        (nbAtTopRight + nbAtBottomLeft + 1) >= 4 ||
+        (nbAtTopLeft + nbAtBottomRight + 1) >= 4
+    );
+};
