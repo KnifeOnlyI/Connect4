@@ -27,7 +27,8 @@ td {
     box-shadow: inset 2px 2px #fff6, inset -2px -2px #0006;
 }
 
-td::before {
+td::before,
+.token::before {
     content: '';
     width: var(--token-size);
     height: var(--token-size);
@@ -37,26 +38,20 @@ td::before {
     background-color: white;
 }
 
-td::before::before {
-    content: '';
-    width: var(--token-thickness);
-    height: var(--token-thickness);
-    display: flex;
-    border-radius: 100%;
-    margin: auto;
-    background-color: red;
-}
-
-td.red::before {
+td.red::before,
+.token.red::before {
     background: var(--red-token-color);
 }
 
-td.yellow::before {
+td.yellow::before,
+.token.yellow::before {
     background: var(--yellow-token-color);
 }
 
 td.yellow::before,
-td.red::before {
+td.red::before,
+.token.yellow::before,
+.token.red::before {
     box-shadow: inset 3px 3px #0006, inset -3px -3px #fffa;
     border: dotted 5px #0002;
 }
