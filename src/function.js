@@ -1,7 +1,7 @@
 /**
  * @param column {number}
  */
-let putInColumn = (column) => {
+function putInColumn(column) {
     let firstAvailableRow = -1;
 
     for (let i = (BOARD_SIZE - 1); i >= 0; i--) {
@@ -32,9 +32,9 @@ let putInColumn = (column) => {
             }
         }
     }
-};
+}
 
-let initGame = () => {
+function initGame() {
     const tbody = document.getElementById('board');
     const thead_tr = document.getElementById('control');
 
@@ -73,4 +73,4 @@ let initGame = () => {
 
     currentPlayerHTML = document.getElementById('currentPlayer');
     currentPlayerHTML.innerText = 'Yellow';
-};
+}

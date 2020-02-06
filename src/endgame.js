@@ -3,7 +3,7 @@
  * @param row {number}
  * @param column {number}
  */
-let checkAtRight = (color, row, column) => {
+function checkAtRight(color, row, column) {
     let nb = 0;
     let currentColumn = column + 1;
 
@@ -19,14 +19,14 @@ let checkAtRight = (color, row, column) => {
     }
 
     return nb;
-};
+}
 
 /**
  * @param color {string}
  * @param row {number}
  * @param column {number}
  */
-let checkAtLeft = (color, row, column) => {
+function checkAtLeft(color, row, column) {
     let nb = 0;
     let currentColumn = column - 1;
 
@@ -42,14 +42,14 @@ let checkAtLeft = (color, row, column) => {
     }
 
     return nb;
-};
+}
 
 /**
  * @param color {string}
  * @param row {number}
  * @param column {number}
  */
-let checkAtBottom = (color, row, column) => {
+function checkAtBottom(color, row, column) {
     let nb = 0;
     let currentRow = row + 1;
 
@@ -65,14 +65,14 @@ let checkAtBottom = (color, row, column) => {
     }
 
     return nb;
-};
+}
 
 /**
  * @param color {string}
  * @param row {number}
  * @param column {number}
  */
-let checkAtTopRight = (color, row, column) => {
+function checkAtTopRight(color, row, column) {
     let nb = 0;
     let currentRow = row - 1;
     let currentColumn = column + 1;
@@ -90,14 +90,14 @@ let checkAtTopRight = (color, row, column) => {
     }
 
     return nb;
-};
+}
 
 /**
  * @param color {string}
  * @param row {number}
  * @param column {number}
  */
-let checkAtBottomLeft = (color, row, column) => {
+function checkAtBottomLeft(color, row, column) {
     let nb = 0;
     let currentRow = row + 1;
     let currentColumn = column - 1;
@@ -115,14 +115,14 @@ let checkAtBottomLeft = (color, row, column) => {
     }
 
     return nb;
-};
+}
 
 /**
  * @param color {string}
  * @param row {number}
  * @param column {number}
  */
-let checkAtTopLeft = (color, row, column) => {
+function checkAtTopLeft(color, row, column) {
     let nb = 0;
     let currentRow = row - 1;
     let currentColumn = column - 1;
@@ -140,14 +140,14 @@ let checkAtTopLeft = (color, row, column) => {
     }
 
     return nb;
-};
+}
 
 /**
  * @param color {string}
  * @param row {number}
  * @param column {number}
  */
-let checkAtBottomRight = (color, row, column) => {
+function checkAtBottomRight(color, row, column) {
     let nb = 0;
     let currentRow = row + 1;
     let currentColumn = column + 1;
@@ -165,7 +165,7 @@ let checkAtBottomRight = (color, row, column) => {
     }
 
     return nb;
-};
+}
 
 /**
  * @param color {string}
@@ -174,7 +174,7 @@ let checkAtBottomRight = (color, row, column) => {
  *
  * @return {boolean} TRUE if game is ended, FALSE otherwise
  */
-let gameIsEnded = (color, row, column) => {
+function gameIsEnded(color, row, column) {
     let nbAtRight = checkAtRight(color, row, column);
     let nbAtLeft = checkAtLeft(color, row, column);
     let nbAtBottom = checkAtBottom(color, row, column);
@@ -189,4 +189,4 @@ let gameIsEnded = (color, row, column) => {
         (nbAtTopRight + nbAtBottomLeft + 1) >= 4 ||
         (nbAtTopLeft + nbAtBottomRight + 1) >= 4
     );
-};
+}
