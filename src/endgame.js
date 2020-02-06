@@ -11,7 +11,7 @@ function checkAtRight(color, row, column) {
     while (currentColumn < BOARD_SIZE) {
         if (board[row][currentColumn] === color) {
             nb++;
-        } else if (board[row][currentColumn] === '0') {
+        } else {
             break;
         }
 
@@ -34,7 +34,7 @@ function checkAtLeft(color, row, column) {
     while (currentColumn >= 0) {
         if (board[row][currentColumn] === color) {
             nb++;
-        } else if (board[row][currentColumn] === '0') {
+        } else {
             break;
         }
 
@@ -57,7 +57,7 @@ function checkAtBottom(color, row, column) {
     while (currentRow < BOARD_SIZE) {
         if (board[currentRow][column] === color) {
             nb++;
-        } else if (board[currentRow][column] === '0') {
+        } else {
             break;
         }
 
@@ -81,7 +81,7 @@ function checkAtTopRight(color, row, column) {
     while ((currentRow >= 0) && (currentColumn < BOARD_SIZE)) {
         if (board[currentRow][currentColumn] === color) {
             nb++;
-        } else if (board[currentRow][currentColumn] === '0') {
+        } else {
             break;
         }
 
@@ -106,7 +106,7 @@ function checkAtBottomLeft(color, row, column) {
     while ((currentRow < BOARD_SIZE) && (currentColumn >= 0)) {
         if (board[currentRow][currentColumn] === color) {
             nb++;
-        } else if (board[currentRow][currentColumn] === '0') {
+        } else {
             break;
         }
 
@@ -131,7 +131,7 @@ function checkAtTopLeft(color, row, column) {
     while ((currentRow >= 0) && (currentColumn >= 0)) {
         if (board[currentRow][currentColumn] === color) {
             nb++;
-        } else if (board[currentRow][currentColumn] === '0') {
+        } else {
             break;
         }
 
@@ -156,7 +156,7 @@ function checkAtBottomRight(color, row, column) {
     while ((currentRow < BOARD_SIZE) && (currentColumn < BOARD_SIZE)) {
         if (board[currentRow][currentColumn] === color) {
             nb++;
-        } else if (board[currentRow][currentColumn] === '0') {
+        } else {
             break;
         }
 
