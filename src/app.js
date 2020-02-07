@@ -12,6 +12,7 @@ let playerColor = 'red';
 let playerTurn = 'red';
 let unsubscribe;
 let counterTimeout;
+let lastMove;
 
 let gameChat = [];
 

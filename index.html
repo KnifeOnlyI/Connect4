@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Connect4</title>
 
@@ -14,88 +14,90 @@
 
 <body>
 
-<div class="container-fluid mt-3">
+    <div class="container-fluid mt-3">
 
-    <div class="row h-100">
+        <div class="row h-100">
 
-        <div class="col-lg-4 col-xl-3 d-flex flex-column">
+            <div class="col-lg-4 col-xl-3 d-flex flex-column">
 
-            <div class="row align-items-center">
+                <div class="row align-items-center">
 
-                <div class="col-12">
-                    <label for="game-id">Game ID</label>
-                    <div class="input-group mb-2">
-                        <input id="game-id" type="text" class="form-control" onClick="this.select();">
-                        <div class="input-group-append">
-                            <button class="btn btn-secondary" onclick="copy()">Copy</button>
+                    <div class="col-12">
+                        <label for="game-id">Game ID</label>
+                        <div class="input-group mb-2">
+                            <input id="game-id" type="text" class="form-control" onClick="this.select()"
+                                style="font-family: monospace;">
+                            <div class="input-group-append">
+                                <button class="btn btn-secondary" onclick="copy()">Copy</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <button class="btn btn-outline-primary btn-block" onclick="connect()">
+                            <span class="spinner-border spinner-border-sm spinner-connect" style="display: none;"
+                                role="status" aria-hidden="true"></span>
+                            Connect
+                        </button>
+                    </div>
+                    <div class="col-md-6">
+                        <button class="btn btn-primary btn-block" onclick="newGame()">
+                            <span class="spinner-border spinner-border-sm spinner-newgame" style="display: none;"
+                                role="status" aria-hidden="true"></span>
+                            New game
+                        </button>
+                    </div>
+
+                    <div class="col-12 mt-3">
+                        <div class="alert alert-primary d-flex align-items-center">
+                            <span class="spinner-border spinner-border spinner-waiting mr-3" style="display: none;"
+                                role="status" aria-hidden="true"></span>
+                            <span id="info-alert-text"></span>
                         </div>
                     </div>
                 </div>
 
-                <div class="col-md-6">
-                    <button class="btn btn-outline-primary btn-block" onclick="connect()">
-                            <span class="spinner-border spinner-border-sm spinner-connect" style="display: none;"
-                                  role="status" aria-hidden="true"></span>
-                        Connect
-                    </button>
-                </div>
-                <div class="col-md-6">
-                    <button class="btn btn-primary btn-block" onclick="newGame()">
-                            <span class="spinner-border spinner-border-sm spinner-newgame" style="display: none;"
-                                  role="status" aria-hidden="true"></span>
-                        New game
-                    </button>
-                </div>
-
-                <div class="col-12 mt-3">
-                    <div class="alert alert-primary d-flex align-items-center">
-                            <span class="spinner-border spinner-border spinner-waiting mr-3" style="display: none;"
-                                  role="status" aria-hidden="true"></span>
-                        <span id="info-alert-text"></span>
+                <div id="game-info" class="row mb-3" style="display: none;">
+                    <div class="col-6 text-center">
+                        <h3>You are</h3>
+                        <div id="player-color" class="token"></div>
+                    </div>
+                    <div class="col-6 text-center">
+                        <h3>Current turn</h3>
+                        <div id="player-turn" class="token"></div>
+                    </div>
+                    <div class="col-12 mt-4 text-center">
+                        <h3>Winner</h3>
+                        <div id="winner" class="token"></div>
                     </div>
                 </div>
             </div>
 
-            <div id="game-info" class="row mb-3" style="display: none;">
-                <div class="col-6 text-center">
-                    <h3>You are</h3>
-                    <div id="player-color" class="token"></div>
-                </div>
-                <div class="col-6 text-center">
-                    <h3>Current turn</h3>
-                    <div id="player-turn" class="token"></div>
-                </div>
-                <div class="col-12 mt-4 text-center">
-                    <h3>Winner</h3>
-                    <div id="winner" class="token"></div>
-                </div>
+            <div class="col h-100">
+
+                <table>
+                    <thead>
+                        <tr id="controls"></tr>
+                    </thead>
+                    <tbody id="board"></tbody>
+                </table>
+
             </div>
-        </div>
 
-        <div class="col h-100">
+            <div class="col-md-3 d-flex flex-column h-100">
 
-            <table>
-                <thead>
-                <tr id="controls"></tr>
-                </thead>
-                <tbody id="board"></tbody>
-            </table>
-
-        </div>
-
-        <div class="col-md-3 d-flex flex-column h-100">
-
-            <div id="chatbox" class="h-100">
-                <div class="row h-100 d-flex flex-column">
-                    <div class="col-12 overflow-auto" style="flex: 1">
-                        <div id="chatbox-body" class="card overflow-auto h-100 d-flex flex-column"></div>
-                    </div>
-                    <div class=" col-12" style="flex: initial">
-                        <div class="row m-auto">
-                            <div class="input-group mt-3">
-                                <input id="chatbox-message" type="text" class="form-control col">
-                                <div class="input-group-append">
-                                    <button class="btn btn-primary col-auto" onclick="send()">Send</button>
+                <div id="chatbox" class="h-100">
+                    <div class="row h-100 d-flex flex-column">
+                        <div class="col-12 overflow-auto" style="flex: 1">
+                            <div id="chatbox-body" class="card overflow-auto h-100 d-flex flex-column"></div>
+                        </div>
+                        <div class=" col-12" style="flex: initial">
+                            <div class="row m-auto">
+                                <div class="input-group mt-3">
+                                    <input id="chatbox-message" type="text" class="form-control col">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-primary col-auto" onclick="send()">Send</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -104,15 +106,14 @@
             </div>
         </div>
     </div>
-</div>
 
-<script src="https://www.gstatic.com/firebasejs/7.8.0/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/7.8.0/firebase-firestore.js"></script>
-<script src="src/endgame.js"></script>
-<script src="src/function.js"></script>
-<script src="src/chatbox.js"></script>
-<script src="src/app.js"></script>
-<script src="src/firebase.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.8.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.8.0/firebase-firestore.js"></script>
+    <script src="src/endgame.js"></script>
+    <script src="src/function.js"></script>
+    <script src="src/chatbox.js"></script>
+    <script src="src/app.js"></script>
+    <script src="src/firebase.js"></script>
 </body>
 
 </html>

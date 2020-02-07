@@ -24,8 +24,6 @@ function subscribe(id) {
     unsubscribe = gamesStore.doc(id).onSnapshot((snap) => {
         playerTurn = snap.data().player;
 
-        console.debug(playerTurn, playerColor);
-
         if (snap.data().ready) {
             loading('waiting', false);
             document.querySelector('#info-alert-text').innerText = 'Have fun !';
@@ -36,6 +34,7 @@ function subscribe(id) {
         document.querySelector('#player-turn').classList.value = `token ${playerTurn}`;
 
         board = snap.data().grid;
+        lastMove = snap.data().moves[snap.data().moves.length - 1];
         drawBoard();
 
         gameEnded = snap.data().winner !== '';
@@ -51,7 +50,7 @@ function subscribe(id) {
             let button = controlsHTML.children.item(i).children.item(0);
 
             if ((playerTurn !== playerColor) || gameEnded) {
-                button.setAttribute('disabled','disabled');
+                button.setAttribute('disabled', 'disabled');
             } else {
                 button.removeAttribute('disabled');
             }
@@ -178,12 +177,14 @@ function putInColumn(column) {
             playerColor === 'red' ? 'yellow' : 'red'
         }`;
 
+        lastMove = `${firstAvailableRow}${column}${playerColor.charAt(0).toUpperCase()}`;
+
         gamesStore.doc(gameId).set({
             player: playerColor === 'red' ? 'yellow' : 'red',
             grid: board,
             winner: gameEnded ? playerColor : '',
             chat: gameChat,
-            moves: firebase.firestore.FieldValue.arrayUnion(`${firstAvailableRow}${column}${playerColor.charAt(0).toUpperCase()}`)
+            moves: firebase.firestore.FieldValue.arrayUnion(lastMove)
         }, {
             merge: true
         });
@@ -239,6 +240,10 @@ function drawBoard() {
                 td.className = 'yellow';
             } else if (board[i][j] === 'R') {
                 td.className = 'red';
+            }
+
+            if (`${i}${j}${board[i][j]}` == lastMove) {
+                td.classList.add('last');
             }
 
             tr.appendChild(td);

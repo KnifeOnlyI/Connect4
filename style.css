@@ -40,6 +40,10 @@ td::before,
     background-color: white;
 }
 
+td.last::before {
+    box-shadow: inset 3px 3px #0006, inset -3px -3px #fffa, 0px 0px 0px 3px white !important;
+}
+
 td.red::before,
 .token.red::before {
     background: var(--red-token-color);
