@@ -78,7 +78,8 @@ function newGame() {
             grid: board,
             winner: '',
             ready: false,
-            chat: []
+            chat: [],
+            moves: []
         })
         .then((snap) => {
             gameId = snap.id;
@@ -176,7 +177,10 @@ function putInColumn(column) {
             player: playerColor === 'red' ? 'yellow' : 'red',
             grid: board,
             winner: gameEnded ? playerColor : '',
-            chat: gameChat
+            chat: gameChat,
+            moves: firebase.firestore.FieldValue.arrayUnion(`${firstAvailableRow}${column}${playerColor.charAt(0).toUpperCase()}`)
+        }, {
+            merge: true
         });
 
         drawBoard();
