@@ -142,6 +142,7 @@ function putInColumn(column) {
                 player: playerColor === 'red' ? 'yellow' : 'red',
                 grid: board,
                 winner: gameEnded ? playerColor : '',
+                chat: gameChat
             });
         }
 
@@ -208,6 +209,7 @@ function drawBoard() {
 function initGame() {
     initControls();
     initBoard();
+    initChat();
 
     document.querySelector('#info-alert-text').innerText =
         'Press "New game" to host a game, then copy the ID to you friend or paste an ID in the field then press connect to play.';

@@ -1,6 +1,15 @@
 const messageBox = document.querySelector('#chatbox-message');
 const chatbox = document.querySelector('#chatbox-body');
 
+function initChat() {
+    messageBox.addEventListener("keyup", function (event) {
+        if (event.keyCode === 13) {
+            event.preventDefault();
+            send();
+        }
+    });
+}
+
 function send() {
     const text = messageBox.value;
 
