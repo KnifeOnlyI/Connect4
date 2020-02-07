@@ -45,9 +45,16 @@ function subscribe(id) {
             document.querySelector('#info-alert-text').innerText = `${winner} won !`;
             document.querySelector('#info-alert-text').className = 'display-4';
             document.querySelector('#winner').classList.value = `token ${snap.data().winner}`;
-        } else if (playerTurn === playerColor) {
-            // Démarrer le compteur ici
-            beginCounter();
+        }
+
+        for (let i = 0; i < BOARD_SIZE; i++) {
+            let button = controlsHTML.children.item(i).children.item(0);
+
+            if ((playerTurn !== playerColor) || gameEnded) {
+                button.setAttribute('disabled','disabled');
+            } else {
+                button.removeAttribute('disabled');
+            }
         }
 
         setChat(snap.data().chat);
@@ -153,8 +160,6 @@ function putInColumn(column) {
     }
 
     if (firstAvailableRow !== -1) {
-        endCounter();
-
         if (playerColor === 'red') {
             board[firstAvailableRow] = setCharAt(board[firstAvailableRow], column, 'R');
 
