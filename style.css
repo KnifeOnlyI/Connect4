@@ -10,6 +10,8 @@
     --cell-size: 85px;
     --token-size: 70px;
     --token-thickness: 40px;
+
+    --primary: var(--grid-color);
 }
 
 table {
