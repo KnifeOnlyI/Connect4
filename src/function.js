@@ -27,7 +27,7 @@ function subscribe(id) {
         gameEnded = snap.data().winner !== '';
 
         if (gameEnded) {
-            const winner = snap.data().winner.charAt(0).toUpperCase() + snap.data().winner.slice(1)
+            const winner = snap.data().winner.charAt(0).toUpperCase() + snap.data().winner.slice(1);
             document.querySelector('#info-alert-text').innerText = `${winner} won !`;
             document.querySelector('#info-alert-text').className = 'display-4';
             document.querySelector('#winner').classList.value = `token ${snap.data().winner}`;

@@ -5,7 +5,6 @@ const controlsHTML = document.querySelector("#controls");
 
 let board = [];
 
-let currentPlayerHTML;
 let gameEnded = false;
 
 let gameId = '';
