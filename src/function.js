@@ -15,6 +15,7 @@ function subscribe(id) {
         if (snap.data().ready) {
             loading('waiting', false);
             document.querySelector('#info-alert-text').innerText = 'Have fun !';
+            document.querySelector('#game-info').style.display = 'flex';
         }
 
         document.querySelector('#player-color').classList.value = `token ${playerColor}`;
@@ -26,7 +27,10 @@ function subscribe(id) {
         gameEnded = snap.data().winner !== '';
 
         if (gameEnded) {
-            document.querySelector('#info-alert-text').innerText = `${snap.data().winner} won !`;
+            const winner = snap.data().winner.charAt(0).toUpperCase() + snap.data().winner.slice(1)
+            document.querySelector('#info-alert-text').innerText = `${winner} won !`;
+            document.querySelector('#info-alert-text').className = 'display-4';
+            document.querySelector('#winner').classList.value = `token ${snap.data().winner}`;
         }
 
         setChat(snap.data().chat);
@@ -209,4 +213,10 @@ function initGame() {
 
     document.querySelector('#info-alert-text').innerText =
         'Press "New game" to host a game, then copy the ID to you friend or paste an ID in the field then press connect to play.';
+}
+
+function copy() {
+    const idBox = document.querySelector('#game-id');
+    idBox.select();
+    document.execCommand('copy');
 }
