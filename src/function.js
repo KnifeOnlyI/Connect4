@@ -6,6 +6,20 @@ function setCharAt(str, index, chr) {
     return str.substr(0, index) + chr + str.substr(index + 1);
 }
 
+function getRandomInt(max) {
+    return Math.floor(Math.random() * Math.floor(max + 1));
+}
+
+function beginCounter() {
+    counterTimeout = setTimeout(() => {
+        putInColumn(getRandomInt(BOARD_SIZE - 1));
+    }, 45000);
+}
+
+function endCounter() {
+    clearTimeout(counterTimeout);
+}
+
 function subscribe(id) {
     unsubscribe = gamesStore.doc(id).onSnapshot((snap) => {
         playerTurn = snap.data().player;
@@ -31,6 +45,9 @@ function subscribe(id) {
             document.querySelector('#info-alert-text').innerText = `${winner} won !`;
             document.querySelector('#info-alert-text').className = 'display-4';
             document.querySelector('#winner').classList.value = `token ${snap.data().winner}`;
+        } else if (playerTurn === playerColor) {
+            // Démarrer le compteur ici
+            beginCounter();
         }
 
         setChat(snap.data().chat);
@@ -121,6 +138,8 @@ function putInColumn(column) {
     }
 
     if (firstAvailableRow !== -1) {
+        endCounter();
+
         if (playerColor === 'red') {
             board[firstAvailableRow] = setCharAt(board[firstAvailableRow], column, 'R');
 
