@@ -28,6 +28,8 @@ function subscribe(id) {
         if (gameEnded) {
             document.querySelector('#info-alert-text').innerText = `${snap.data().winner} won !`;
         }
+
+        setChat(snap.data().chat);
     });
 }
 
@@ -48,6 +50,7 @@ function newGame() {
             grid: new Array(BOARD_SIZE).fill('0'.repeat(BOARD_SIZE)),
             winner: '',
             ready: false,
+            chat: []
         })
         .then((snap) => {
             gameId = snap.id;
@@ -83,7 +86,9 @@ function connect() {
             }`;
             subscribe(snap.id);
 
-            return gamesStore.doc(writtenId).update({ ready: true });
+            return gamesStore.doc(writtenId).update({
+                ready: true
+            });
         })
         .then(() => {
             loading('connect', false);
@@ -130,11 +135,15 @@ function putInColumn(column) {
             playerColor === 'red' ? 'yellow' : 'red'
         }`;
 
-        gamesStore.doc(gameId).set({
-            player: playerColor === 'red' ? 'yellow' : 'red',
-            grid: board,
-            winner: gameEnded ? playerColor : '',
-        });
+        if (gameEnded) {
+            gamesStore.doc(gameId).delete();
+        } else {
+            gamesStore.doc(gameId).set({
+                player: playerColor === 'red' ? 'yellow' : 'red',
+                grid: board,
+                winner: gameEnded ? playerColor : '',
+            });
+        }
 
         drawBoard();
     }

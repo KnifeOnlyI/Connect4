@@ -13,4 +13,6 @@ let playerColor = 'red';
 let playerTurn = 'red';
 let unsubscribe;
 
+let gameChat = [];
+
 window.onload = initGame;

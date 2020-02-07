@@ -65,3 +65,35 @@ thead button {
     box-shadow: 2px 2px #fff6;
     margin-bottom: 6px;
 }
+
+.container-fluid {
+    height: calc(100vh - 2rem);
+}
+
+.overflow-auto {
+    overflow: auto;
+}
+
+.message {
+    padding: 0.5rem;
+    color: white;
+    max-width: 90%;
+    border-radius: 4px;
+    margin: 2px;
+}
+
+.message.right {
+    margin-left: auto;
+}
+
+.message.red {
+    background-color: var(--red-token-color);
+}
+
+.message.left {
+    margin-right: auto;
+}
+
+.message.yellow {
+    background-color: var(--yellow-token-color);
+}
