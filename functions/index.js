@@ -39,3 +39,19 @@ exports.getAllFinishedGames = functions.https.onRequest(async (request, response
 
     response.send(games);
 });
+
+exports.getAllFinishedGameMoves = functions.https.onRequest(async (request, response) => {
+    moves = [];
+
+    const snap = await admin.firestore()
+        .collection("games")
+        .get()
+
+    snap.forEach((doc) => {
+        if (doc.data().winner && doc.data().moves && doc.data().moves !== []) {
+            moves.push(doc.data().moves);
+        }
+    });
+
+    response.send(moves);
+});
