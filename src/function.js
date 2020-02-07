@@ -22,6 +22,13 @@ function endCounter() {
 
 function subscribe(id) {
     unsubscribe = gamesStore.doc(id).onSnapshot((snap) => {
+
+        if (snap.data().nextGameId) {
+            document.querySelector('#game-id').value = snap.data().nextGameId;
+            connect();
+            return;
+        }
+
         playerTurn = snap.data().player;
 
         if (snap.data().ready) {
@@ -91,9 +98,17 @@ function newGame() {
             winner: '',
             ready: false,
             chat: [],
-            moves: []
+            moves: [],
+            nextGameId: ''
         })
         .then((snap) => {
+
+            if (gameEnded) {
+                gamesStore.doc(gameId).update({
+                    nextGameId: snap.id
+                });
+            }
+
             gameId = snap.id;
             document.querySelector('#game-id').value = snap.id;
             playerColor = 'red';
