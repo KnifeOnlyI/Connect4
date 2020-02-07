@@ -24,6 +24,7 @@ function subscribe(id) {
     unsubscribe = gamesStore.doc(id).onSnapshot((snap) => {
 
         if (snap.data().nextGameId) {
+            showNotif('Opponent has started another game');
             document.querySelector('#game-id').value = snap.data().nextGameId;
             connect();
             return;
@@ -70,7 +71,17 @@ function subscribe(id) {
         }
 
         setChat(snap.data().chat);
+
+        if (snap.data().ready && playerTurn === playerColor) {
+            showNotif('It\'s your turn !');
+        }
     });
+}
+
+function showNotif(text) {
+    if (document.hidden && Notification.permission === 'granted') {
+        new Notification(text);
+    }
 }
 
 function loading(type, state) {
@@ -283,6 +294,8 @@ function initGame() {
 
     document.querySelector('#info-alert-text').innerText =
         'Press "New game" to host a game, then copy the ID to you friend or paste an ID in the field then press connect to play.';
+
+    Notification.requestPermission();
 }
 
 function copy() {
