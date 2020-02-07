@@ -50,6 +50,16 @@ function subscribe(id) {
             beginCounter();
         }
 
+        for (let i = 0; i < BOARD_SIZE; i++) {
+            let button = controlsHTML.children.item(i).children.item(0);
+
+            if ((playerTurn !== playerColor) || gameEnded) {
+                button.setAttribute('disabled','disabled');
+            } else {
+                button.removeAttribute('disabled');
+            }
+        }
+
         setChat(snap.data().chat);
     });
 }
