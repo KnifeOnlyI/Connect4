@@ -135,16 +135,12 @@ function putInColumn(column) {
             playerColor === 'red' ? 'yellow' : 'red'
         }`;
 
-        if (gameEnded) {
-            gamesStore.doc(gameId).delete();
-        } else {
-            gamesStore.doc(gameId).set({
-                player: playerColor === 'red' ? 'yellow' : 'red',
-                grid: board,
-                winner: gameEnded ? playerColor : '',
-                chat: gameChat
-            });
-        }
+        gamesStore.doc(gameId).set({
+            player: playerColor === 'red' ? 'yellow' : 'red',
+            grid: board,
+            winner: gameEnded ? playerColor : '',
+            chat: gameChat
+        });
 
         drawBoard();
     }
