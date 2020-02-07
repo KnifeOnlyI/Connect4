@@ -103,3 +103,8 @@ thead button {
 .message.yellow {
     background-color: var(--yellow-token-color);
 }
+
+#game-id {
+    font-family: monospace;
+    font-size: large;
+}

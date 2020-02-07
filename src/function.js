@@ -34,7 +34,13 @@ function subscribe(id) {
         document.querySelector('#player-turn').classList.value = `token ${playerTurn}`;
 
         board = snap.data().grid;
-        lastMove = snap.data().moves[snap.data().moves.length - 1];
+
+        if (snap.data().moves && snap.data().moves.length) {
+            lastMove = snap.data().moves[snap.data().moves.length - 1];
+        } else {
+            lastMove = '';
+        }
+
         drawBoard();
 
         gameEnded = snap.data().winner !== '';
