@@ -61,6 +61,13 @@ function loading(type, state) {
 }
 
 function newGame() {
+    board = new Array(BOARD_SIZE).fill('0'.repeat(BOARD_SIZE));
+    winner = '';
+    document.querySelector('#player-color').classList.value = `token`;
+    document.querySelector('#player-turn').classList.value = `token`;
+    document.querySelector('#winner').classList.value = `token`;
+    document.querySelector('#info-alert-text').className = '';
+
     loading('newgame', true);
 
     if (unsubscribe) unsubscribe();
@@ -68,7 +75,7 @@ function newGame() {
     gamesStore
         .add({
             player: 'red',
-            grid: new Array(BOARD_SIZE).fill('0'.repeat(BOARD_SIZE)),
+            grid: board,
             winner: '',
             ready: false,
             chat: []
@@ -89,6 +96,13 @@ function newGame() {
 }
 
 function connect() {
+    board = new Array(BOARD_SIZE).fill('0'.repeat(BOARD_SIZE));
+    winner = '';
+    document.querySelector('#player-color').classList.value = `token`;
+    document.querySelector('#player-turn').classList.value = `token`;
+    document.querySelector('#winner').classList.value = `token`;
+    document.querySelector('#info-alert-text').className = '';
+
     loading('connect', true);
 
     if (unsubscribe) unsubscribe();
@@ -229,6 +243,8 @@ function initGame() {
     initControls();
     initBoard();
     initChat();
+
+    document.querySelector('#game-id').value = '';
 
     document.querySelector('#info-alert-text').innerText =
         'Press "New game" to host a game, then copy the ID to you friend or paste an ID in the field then press connect to play.';

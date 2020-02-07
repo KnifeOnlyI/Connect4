@@ -20,3 +20,22 @@ exports.clearGamesNotFinished = functions.https.onRequest(async (request, respon
     });
 
 });
+
+exports.getAllFinishedGames = functions.https.onRequest(async (request, response) => {
+    games = [];
+
+    const snap = await admin.firestore()
+        .collection("games")
+        .get()
+
+    snap.forEach((doc) => {
+        if (doc.data().winner) {
+            games.push({
+                winner: doc.data().winner,
+                board: doc.data().grid
+            });
+        }
+    });
+
+    response.send(games);
+});
